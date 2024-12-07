@@ -43,6 +43,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["Male", "Female", "Other"],
     },
+    about: {
+      type: String,
+    },
   },
   {
     timestamps: true,
