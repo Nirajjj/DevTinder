@@ -33,7 +33,7 @@ authRouter.post("/login", async (req, res) => {
         maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       });
-      res.send("login success");
+      res.json({ message: "login success", data: user });
     }
     // await user.save();
     // res.send("user added successfully!");

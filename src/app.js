@@ -1,9 +1,11 @@
 const express = require("express");
 const connectDb = require("./config/database");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 // const { validatePassword } = require("./models/user");
 
 const app = express();
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
