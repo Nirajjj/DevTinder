@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 profileRoutes.get("/profile/view", userAuth, async (req, res) => {
   try {
     const user = req.user;
-    res.send(user);
+    res.json({ data: user });
   } catch (e) {
     res.status(403).send("error: " + e.message);
   }
@@ -24,9 +24,9 @@ profileRoutes.patch("/profile/edit", userAuth, async (req, res) => {
     });
     await userOriginalData.save();
     // const user = req.user;
-    res.send({
+    res.json({
       message: `${userOriginalData.firstName}, your data is update`,
-      updatedData: userOriginalData,
+      data: userOriginalData,
     });
   } catch (e) {
     res.status(403).send("error: " + e.message);
@@ -45,7 +45,7 @@ profileRoutes.patch("/profile/forgotpassword", userAuth, async (req, res) => {
     const userOriginalData = req.user;
     const passwordHash = await bcrypt.hash(req.body.newPassword, 10);
     // Object.keys(req.body).forEach((key) => {
-      userOriginalData["password"] = passwordHash;
+    userOriginalData["password"] = passwordHash;
     // });
     await userOriginalData.save();
     // const user = req.user;

@@ -1,6 +1,13 @@
 const validateEditData = (userTypeJson) => {
   try {
-    const AllowedEdit = ["firstName", "lastName", "age", "gender", "about"];
+    const AllowedEdit = [
+      "firstName",
+      "lastName",
+      "age",
+      "gender",
+      "about",
+      "photoUrl",
+    ];
     const isEditAllow = Object.keys(userTypeJson).every((key) =>
       AllowedEdit.includes(key)
     );
