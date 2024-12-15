@@ -46,6 +46,14 @@ const userSchema = new mongoose.Schema(
     about: {
       type: String,
     },
+    photoUrl: {
+      type: String,
+      validate(value) {
+        if (!validator.isURL(value)) {
+          throw new Error("Invalid url");
+        }
+      },
+    },
   },
   {
     timestamps: true,
