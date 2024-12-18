@@ -14,7 +14,7 @@ userRouter.get("/user/request/received", userAuth, async (req, res) => {
       toUserId: loginUserId,
       status: "interested",
     }).populate("fromUserId", SAFE_DATA_SEND);
-    res.json({ message: "request received", requests });
+    res.json({ message: "request received", data: requests });
     if (!requests) {
       throw new Erro("no request");
     }
