@@ -57,7 +57,7 @@ requestRoute.post("/request/review/:status/:requestId", userAuth, async (req, re
     if(!isRequestId){
       throw new Error("user not found")
     }
-    const request = Connection.findOne({
+    const request = await Connection.findOne({
       _id: requestId,
       toUserId: loginUserId,
       status: "interested"
@@ -65,8 +65,8 @@ requestRoute.post("/request/review/:status/:requestId", userAuth, async (req, re
     if(!request){
       throw new Error("user not found")
     }
-    await Connection.findByIdAndUpdate(requestId, {status})
-    res.json({message: `request ${status}`})
+    const data = await Connection.findByIdAndUpdate(requestId, {status})
+    res.json({message: `request ${status}`, data})
   } catch (error) {
     res.status(400).send("ERROR " + error.message)
   }
