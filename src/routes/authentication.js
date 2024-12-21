@@ -5,12 +5,26 @@ const bcrypt = require("bcrypt");
 const authRouter = express.Router();
 
 authRouter.post("/signup", async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
-  const passwordHash = await bcrypt.hash(password, 10);
-  const user = new User({ firstName, lastName, email, password: passwordHash });
   try {
-    await user.save();
-    res.send("user added successfully!");
+    const { firstName, lastName, email, password } = req.body;
+
+    const passwordHash = await bcrypt.hash(password, 10);
+    const user = new User({
+      firstName,
+      lastName,
+      email,
+      password: passwordHash,
+    });
+
+    const userData = await user.save();
+    var token = await user.getJwt();
+    res.cookie("token", token, {
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
+    // res.json({ message: "login success", data: user });
+
+    res.json({ message: "user added successfully!", data: userData });
   } catch (error) {
     res.status(400).send("data saving error!" + error.message);
   }
