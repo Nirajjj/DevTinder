@@ -5,7 +5,7 @@ const cors = require("cors");
 // const { validatePassword } = require("./models/user");
 
 const app = express();
-app.use(cors({ origin: "https://dev-tinder.netlify.app/", credentials: true }));
+app.use(cors({ origin: "https://dev-tinder.netlify.app", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
