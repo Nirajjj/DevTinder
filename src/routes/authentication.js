@@ -20,9 +20,6 @@ authRouter.post("/signup", async (req, res) => {
     var token = await user.getJwt();
     res.cookie("token", token, {
       maxAge: 7 * 24 * 60 * 60 * 1000,
-      httpOnly: true,
-      // maxAge: 7 * 24 * 60 * 60 * 1000,
-      // httpOnly: true,
       sameSite: "none",
       secure: true,
     });
@@ -52,8 +49,8 @@ authRouter.post("/login", async (req, res) => {
         httpOnly: true,
         // maxAge: 7 * 24 * 60 * 60 * 1000,
         // httpOnly: true,
-        sameSite: "none",
-        secure: true,
+        // sameSite: "none",
+        // secure: true,
       });
       res.json({ message: "login success", data: user });
     }
